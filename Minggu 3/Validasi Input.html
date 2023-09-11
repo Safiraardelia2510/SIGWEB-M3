@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Validasi Input</h1>
+    <p>Masukkan nama, password, dan alamat email anda : </p>
+    Nama     : <input type="text" id="nama" > <br>
+    Password : <input type="password" id="pwd" > <br>
+    E-mail: <input type="email" id="email" > <br>
+    <input type="button" value="click" onclick="validate();"/>
+
+    <script>
+    function validate(){
+        var pass, check, message;
+        var check = "sas";
+        pass = document.getElementById("pwd").value;
+
+            if (pass === check) {
+                message = "Password benar!";
+                alert(message);
+            }
+
+            else{
+                message = "Password salah!";
+                alert(message);
+            }
+    }
+    </script>
+</body>
+</html>

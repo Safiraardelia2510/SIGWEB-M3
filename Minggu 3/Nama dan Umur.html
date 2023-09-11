@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Validasi Input</h1>
+    Nama     : <input type="text" id="nama" > <br>
+    Umur : <input type="text" id="usia" > <br>
+    <input type="button" value="click" onclick="validate();"/>
+
+    <script>
+    function validate(){
+        var name, age, message;
+            name = document.getElementById("nama").value;
+            age = document.getElementById("usia").value;
+
+            if (name == "" )  {
+                message = "isikan nama !!";
+                alert(message);
+            }
+
+            else if (age == ""){
+                message = "isikan umur!!\n ";
+                alert(message);
+            }
+
+            else if(age == 0 || age <0){
+                message = "Anda Game over!";
+                alert(message);
+            }
+            
+            else if(age > 0 && age < 5){
+                message = "’Anda masih bayi’";
+                alert(message);
+            }
+
+            else if(age <= 15){
+                message = "’Anda masih anak-anak’";
+                alert(message);
+            }
+
+            else if(age <= 30){
+                message = "’Anda masih remaja’";
+                alert(message);
+            }
+
+            else if(age <=60){
+                message = "’Anda sudah dewasa’";
+                alert(message);
+            }
+
+            else if (name == ""  && age == "")  {
+                message = "isikan nama dan umur!!";
+                alert(message);
+            }
+
+            else{
+                message = "’Anda sudah lansia’";
+                alert(message);
+            }
+
+    }
+    </script>
+
+</body>
+</html>
