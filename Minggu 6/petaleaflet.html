@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaflet Web Map 2</title>
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="">
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"crossorigin="anonymous">
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"crossorigin="anonymous"></script>
+    <style>
+        #map {
+		height: calc(100vh - 60px);
+	}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" datatarget="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)
+        </span></a>
+        </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+        <button
+        class="btn btn-outline-success my-2 my-sm-0">
+        Lokasi saya
+        </button>
+        </form>
+        </div>
+        </nav>
+<body>
+    <div id="map"></div>
+    <script src="magelang.js"></script>
+    <script>
+        var map = L.map('map').setView([-7.79558, 110.36949], 12);
+        L.tileLayer ('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>contributors'}).addTo(map);
+        var marker = L.marker([-7.554185314370411, 110.1681429909313]).addTo(map);
+        marker.bindPopup('Rumah').openPopup();
+        var marker = L.marker([-7.570030501781969, 110.1874768263901]).addTo(map);
+        marker.bindPopup('Pemandian Air Hangat').openPopup();
+        var marker = L.marker([-7.608879092180164, 110.17686232320763]).addTo(map);
+        marker.bindPopup('Punthuk Setumbu').openPopup();
+        var marker = L.marker([-7.500259560086174, 110.39306374641286]).addTo(map);
+        marker.bindPopup('Air Terjun Kedung Kayang').openPopup();
+        var marker = L.marker([-7.4570730089144055, 110.06755555142098]).addTo(map);
+        marker.bindPopup('Curug Silawe').openPopup();
+
+        var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        });
+
+        var osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'
+        });
+
+        var baseMaps = {
+            "OpenStreetMap": osm,
+            "OpenStreetMap.HOT": osmHOT
+        };
+
+        var overlayMaps = {
+            "Marker": marker
+        };
+
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+        L.geoJSON(magelanggeojson,{
+		style: function(feature) {
+			switch (feature.properties.KECAMATAN) {
+				case 'BANDONGAN': return {color: "#ff9900"};
+				case 'BOROBUDUR':   return {color: "red"};
+				case 'CANDIMULYO':   return {color: "blue"};
+				case 'DUKUN':   return {color: "yellow"};
+                case 'GRABAG':   return {color: "tomato"};
+                case 'KAJORAN':   return {color: "aqua"};
+                case 'KALIANGKRIK':   return {color: "purple"};
+                case 'MERTOYUDAN':   return {color: "coral"};
+                case 'MUNGKID':   return {color: "gold"};
+                case 'MUNTILAN':   return {color: "grey"};
+                case 'NGABLAK':   return {color: "maroon"};
+                case 'NGLUWAR':   return {color: "olive"};
+                case 'PAKIS':   return {color: "orange"};
+                case 'SALAM':   return {color: "pink"};
+                case 'SALAMAN':   return {color: "plum"};
+                case 'SAWANGAN':   return {color: "salmon"};
+                case 'SECANG':   return {color: "teal"};
+                case 'SRUMBUNG':   return {color: "thistle"};
+                case 'TEGALREJO':   return {color: "papaya whip"};
+                case 'TEMPURAN':   return {color: "green"};
+				case 'WINDUSARI':   return {color: "magenta"};
+			}
+		},
+		onEachFeature: function (feature, layer) {
+			layer.bindPopup(
+			'Kecamatan adalah ' + 
+			'<strong>' +
+			feature.properties.KECAMATAN +
+			'</strong>'
+			);
+		}
+	}).addTo(map);
+    </script>
+</body>
+</body>
+</html>
